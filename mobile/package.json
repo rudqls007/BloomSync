@@ -1,0 +1,21 @@
+{
+  "name": "bloomsync-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BloomSync Cross-Platform Native Mobile App Shell (Capacitor / iOS & Android)",
+  "scripts": {
+    "cap:sync": "cd ../web && npx cap sync",
+    "cap:copy": "cd ../web && npx cap copy",
+    "cap:open:android": "cd ../web && npx cap open android",
+    "cap:open:ios": "cd ../web && npx cap open ios",
+    "build:mobile": "cd ../web && npm run build && npx cap sync"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/ios": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}
