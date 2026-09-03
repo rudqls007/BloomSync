@@ -1,72 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-gradient-light: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  /* Default Light Palette */
+  --bg-gradient-light: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #fef2f2 100%);
   --bg-main-light: #f8fafc;
-  --card-bg-light: rgba(255, 255, 255, 0.85);
-  --text-primary-light: #1e293b;
-  --text-secondary-light: #64748b;
-  --border-light: rgba(226, 232, 240, 0.8);
+  --card-bg-light: rgba(255, 255, 255, 0.82);
+  --card-hover-bg-light: rgba(255, 255, 255, 0.95);
+  --text-primary-light: #0f172a;
+  --text-secondary-light: #475569;
+  --border-light: rgba(226, 232, 240, 0.9);
+  --shadow-light: 0 16px 40px -10px rgba(15, 23, 42, 0.08);
 
-  --bg-gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-  --bg-main-dark: #0f172a;
-  --card-bg-dark: rgba(30, 41, 59, 0.85);
+  /* Dark Midnight Palette */
+  --bg-gradient-dark: linear-gradient(135deg, #0b0f19 0%, #131b2e 50%, #1d1435 100%);
+  --bg-main-dark: #0b0f19;
+  --card-bg-dark: rgba(19, 27, 46, 0.8);
+  --card-hover-bg-dark: rgba(27, 38, 64, 0.9);
   --text-primary-dark: #f8fafc;
   --text-secondary-dark: #94a3b8;
-  --border-dark: rgba(51, 65, 85, 0.6);
+  --border-dark: rgba(236, 72, 153, 0.25);
+  --shadow-dark: 0 20px 45px -10px rgba(0, 0, 0, 0.5);
 
+  /* Brand Accents */
+  --brand-gradient: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #6366f1 100%);
   --accent-pink: #ec4899;
+  --accent-purple: #a855f7;
+  --accent-indigo: #6366f1;
   --accent-rose: #f43f5e;
-  --accent-purple: #8b5cf6;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
 
-  --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 20px rgba(236, 72, 153, 0.3);
-  --glass-blur: blur(16px);
-}
-
-[data-theme='dark'] {
-  --bg-main: var(--bg-main-dark);
-  --bg-gradient: var(--bg-gradient-dark);
-  --card-bg: var(--card-bg-dark);
-  --text-primary: var(--text-primary-dark);
-  --text-secondary: var(--text-secondary-dark);
-  --border-color: var(--border-dark);
+  --glass-blur: blur(20px);
 }
 
 [data-theme='light'] {
   --bg-main: var(--bg-main-light);
   --bg-gradient: var(--bg-gradient-light);
   --card-bg: var(--card-bg-light);
+  --card-hover-bg: var(--card-hover-bg-light);
   --text-primary: var(--text-primary-light);
   --text-secondary: var(--text-secondary-light);
   --border-color: var(--border-light);
+  --shadow-soft: var(--shadow-light);
+}
+
+[data-theme='dark'] {
+  --bg-main: var(--bg-main-dark);
+  --bg-gradient: var(--bg-gradient-dark);
+  --card-bg: var(--card-bg-dark);
+  --card-hover-bg: var(--card-hover-bg-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --border-color: var(--border-dark);
+  --shadow-soft: var(--shadow-dark);
+}
+
+/* Fallback for uninitialized theme */
+:root:not([data-theme]) {
+  --bg-main: var(--bg-main-light);
+  --bg-gradient: var(--bg-gradient-light);
+  --card-bg: var(--card-bg-light);
+  --card-hover-bg: var(--card-hover-bg-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --border-color: var(--border-light);
+  --shadow-soft: var(--shadow-light);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: 'Noto Sans KR', 'Outfit', sans-serif;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
-  min-height: 100vh;
   transition: background 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utility classes */
 .glass-panel {
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 24px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -75,17 +100,19 @@ body {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px -15px rgba(236, 72, 153, 0.2);
-  border-color: rgba(236, 72, 153, 0.4);
+  background: var(--card-hover-bg);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25);
+  border-color: rgba(236, 72, 153, 0.5);
 }
 
-/* Custom Scrollbar */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -94,18 +121,18 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
-  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-pink);
 }
 
-/* Animations */
+/* Keyframe Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -113,32 +140,36 @@ body {
   }
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(236, 72, 153, 0.8);
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(236, 72, 153, 0.7);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
 
-/* Leaflet Map custom fixes */
+/* Leaflet Map Styling */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 20px;
   z-index: 1;
+}
+
+[data-theme='dark'] .leaflet-tile-pane {
+  filter: brightness(0.85) invert(1) contrast(1.1) hue-rotate(200deg);
 }

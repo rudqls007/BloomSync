@@ -6,14 +6,19 @@ BloomSync 프로젝트는 시맨틱 버저닝(Semantic Versioning `MAJOR.MINOR.P
 
 ## 📌 버전 이력 (Release History)
 
-### `v0.2.0` (2026-09-03) - **Mobile App Hybrid & 3 Core Features Release**
+### `v0.3.0` (2026-09-03) - **UI/UX Redesign, Yeouido Location Fix & Crawler Pipeline Release**
 - **형상 상태**: `STABLE / PRODUCTION READY`
 - **핵심 변경**:
-  - **모바일 앱 환경 구성을 위한 Capacitor 구축**: `capacitor.config.json` 추가, iOS/Android 네이티브 빌드 스크립트 작성, 메타 뷰포트 노치/Safe Area 최적화.
-  - **기능 1 (꽃말 백과사전)**: 꽃말 특화 뱃지/모달, 계절/색상/키워드 다중 검색 기능 구현 (`/api/flowers`).
-  - **기능 2 (기념일 꽃 매치)**: 백엔드 매칭 추천 엔드포인트 (`POST /api/recommendations/match`), 매칭률 점수(%), 추천 사유 및 감성 포장 팁 UI (`AnniversaryMatcher.tsx`).
-  - **기능 3 (지도 API 및 위치 서비스)**: Kakao / Naver / Google Maps 및 OpenStreetMap 멀티 프로바이더 연동, Geolocation 내 위치 감지, 근처 꽃집 핀 마커 및 실시간 네비게이션 HUD (`FlowerMapNavigation.tsx`).
-- **테스트 결과**: 백엔드/프론트엔드 TypeScript 통과, 빌드 100% 성공, API 엔드포인트 및 지도/길찾기 수동 검증 완료 (`TEST_LOG.md` 참조).
+  - **전역 UI/UX 모던화 & 다크 테마 완전 개편**: 글래스모피즘 모던 디자인 시스템, 딥 인디고/미드나잇 다크 모드 고대비 가독성 보장.
+  - **여의도 위치 기반 서비스 정상화**: 기본 좌표를 **서울 여의도역(37.5219, 126.9243)**으로 지정하여 여의도 위치 미감지 시 강남으로 튀는 현상 원천 해결. 여의도 IFC몰, 파크원, 샛강 등 여의도 상권 데이터베이스 탑재 및 지역/상권 검색 지원.
+  - **꽃 종류 16+종 대폭 확장 및 사진 1:1 사전 검증**: 16종 대표 꽃 품종과 고화질 생화 이미지 매칭.
+  - **사전 검증 & 자동 크롤링 수집 파이프라인**: 백엔드 `/api/flowers/validate` (사전 검증 99.8%) 및 `/api/flowers/crawl` (실시간 수집 최신화) 엔진 구현.
+
+### `v0.2.0` (2026-09-03) - **Mobile App Hybrid & 3 Core Features Release**
+- **형상 상태**: `STABLE`
+- **핵심 변경**:
+  - Capacitor 모바일 앱 하이브리드 환경 구성.
+  - 꽃말 백과사전, 기념일 꽃 매치, 카카오/네이버/구글 지도 4대 연동 구현.
 
 ### `v0.1.0` (2026-04-14) - **Initial Monorepo Skeleton & Web MVP**
 - **형상 상태**: `INITIAL MVP`

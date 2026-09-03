@@ -14,7 +14,7 @@ const ensureLeafletCss = () => {
 };
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 2rem auto;
   padding: 0 1.5rem;
 `;
@@ -25,40 +25,47 @@ const HeaderBox = styled.div`
   align-items: center;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.2rem;
 `;
 
 const Title = styled.h2`
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  background: var(--brand-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+`;
+
+const ControlBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 `;
 
 const ProviderSelectorGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: var(--card-bg);
-  padding: 0.3rem 0.6rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 999px;
   border: 1px solid var(--border-color);
 `;
 
 const ProviderChip = styled.button<{ $active: boolean }>`
-  padding: 0.4rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
   border: none;
-  background: ${props => (props.$active ? 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)' : 'transparent')};
+  background: ${props => (props.$active ? 'var(--brand-gradient)' : 'transparent')};
   color: ${props => (props.$active ? '#ffffff' : 'var(--text-secondary)')};
-  font-weight: ${props => (props.$active ? '700' : '500')};
-  font-size: 0.85rem;
+  font-weight: ${props => (props.$active ? '800' : '600')};
+  font-size: 0.88rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 
   &:hover {
     color: ${props => (props.$active ? '#ffffff' : 'var(--text-primary)')};
@@ -69,29 +76,86 @@ const RefreshButton = styled.button`
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  padding: 0.6rem 1.2rem;
+  padding: 0.65rem 1.2rem;
   border-radius: 999px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   transition: all 0.3s ease;
 
   &:hover {
     border-color: #ec4899;
     color: #ec4899;
+    transform: translateY(-1px);
+  }
+`;
+
+const LocationNoticeBanner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  padding: 0.9rem 1.4rem;
+  border-radius: 18px;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+`;
+
+const RegionFilterGroup = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+`;
+
+const RegionChip = styled.button<{ $active: boolean }>`
+  padding: 0.4rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid ${props => (props.$active ? '#ec4899' : 'var(--border-color)')};
+  background: ${props => (props.$active ? '#ec4899' : 'var(--card-bg)')};
+  color: ${props => (props.$active ? '#ffffff' : 'var(--text-secondary)')};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #ec4899;
+    color: ${props => (props.$active ? '#ffffff' : 'var(--text-primary)')};
+  }
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 0.8rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 1rem;
+
+  &:focus {
+    border-color: #ec4899;
   }
 `;
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 1.5rem;
-  height: 650px;
+  grid-template-columns: 380px 1fr;
+  gap: 1.8rem;
+  height: 680px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 960px) {
     grid-template-columns: 1fr;
     height: auto;
   }
@@ -100,22 +164,22 @@ const Layout = styled.div`
 const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   overflow-y: auto;
   padding-right: 0.5rem;
-  max-height: 650px;
+  max-height: 680px;
 `;
 
 const StoreCard = styled.div<{ $selected: boolean }>`
-  padding: 1.3rem;
-  border-radius: 18px;
+  padding: 1.4rem;
+  border-radius: 20px;
   cursor: pointer;
+  margin-bottom: 1rem;
   border: 2px solid ${props => (props.$selected ? '#ec4899' : 'transparent')};
-  box-shadow: ${props => (props.$selected ? '0 0 20px rgba(236, 72, 153, 0.3)' : 'var(--shadow-soft)')};
+  box-shadow: ${props => (props.$selected ? '0 0 25px rgba(236, 72, 153, 0.35)' : 'var(--shadow-soft)')};
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
   }
 `;
 
@@ -127,7 +191,7 @@ const StoreHeader = styled.div`
 `;
 
 const StoreName = styled.h3`
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: var(--text-primary);
 `;
@@ -135,41 +199,41 @@ const StoreName = styled.h3`
 const RatingBadge = styled.span`
   color: #f59e0b;
   font-size: 0.9rem;
-  font-weight: 700;
-  background: rgba(245, 158, 11, 0.12);
-  padding: 0.2rem 0.6rem;
+  font-weight: 800;
+  background: rgba(245, 158, 11, 0.15);
+  padding: 0.25rem 0.65rem;
   border-radius: 999px;
 `;
 
 const StoreAddress = styled.p`
   color: var(--text-secondary);
-  font-size: 0.85rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.88rem;
+  margin-bottom: 0.7rem;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
 `;
 
 const DistanceBadge = styled.span`
   color: #ec4899;
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: 800;
+  font-size: 0.88rem;
 `;
 
 const CategoryTags = styled.div`
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
 `;
 
 const CatTag = styled.span`
-  background: rgba(236, 72, 153, 0.1);
+  background: rgba(236, 72, 153, 0.12);
   color: #ec4899;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 const ButtonRow = styled.div`
@@ -178,12 +242,12 @@ const ButtonRow = styled.div`
 `;
 
 const PhoneButton = styled.a`
-  padding: 0.7rem;
-  background: rgba(139, 92, 246, 0.15);
-  color: #8b5cf6;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.88rem;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -192,19 +256,19 @@ const PhoneButton = styled.a`
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(139, 92, 246, 0.25);
+    background: rgba(168, 85, 247, 0.25);
   }
 `;
 
 const NavButton = styled.button`
   flex: 1;
-  padding: 0.7rem;
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  padding: 0.75rem;
+  background: var(--brand-gradient);
   color: white;
   border: none;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 0.92rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -221,8 +285,8 @@ const MapContainerWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 480px;
-  border-radius: 24px;
+  min-height: 500px;
+  border-radius: 28px;
   overflow: hidden;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-soft);
@@ -230,62 +294,63 @@ const MapContainerWrapper = styled.div`
 
 const MapProviderNotice = styled.div`
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  bottom: 1.2rem;
+  left: 1.2rem;
   z-index: 10;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(8px);
-  color: #e2e8f0;
-  padding: 0.4rem 0.9rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  color: #f8fafc;
+  padding: 0.45rem 1rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 `;
 
 const NavigationHUD = styled.div`
   position: absolute;
-  top: 1rem;
+  top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(14px);
   color: #fff;
-  padding: 1rem 1.8rem;
+  padding: 1.1rem 2rem;
   border-radius: 999px;
-  border: 1px solid rgba(236, 72, 153, 0.5);
+  border: 1px solid rgba(236, 72, 153, 0.6);
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  gap: 1.6rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
   width: max-content;
-  max-width: 90%;
+  max-width: 92%;
 `;
 
 const HUDText = styled.div`
   display: flex;
   flex-direction: column;
   div.title {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: #ec4899;
-    font-weight: 700;
+    font-weight: 800;
   }
   div.guide {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 800;
   }
 `;
 
 const StopNavButton = styled.button`
-  background: rgba(244, 63, 94, 0.25);
+  background: rgba(244, 63, 94, 0.3);
   border: 1px solid #f43f5e;
   color: #f43f5e;
-  padding: 0.4rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.8rem;
+  font-weight: 800;
+  font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -307,10 +372,15 @@ const FlowerMapNavigation: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]);
   const [selectedStore, setSelectedStore] = useState<Store | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<MapProvider>('kakao');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('여의도');
+
+  // 기본 고정 좌표: 서울 영등포구 여의도역 (37.5219, 126.9243)
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number }>({
-    lat: 37.4979,
-    lng: 127.0276
+    lat: 37.5219,
+    lng: 126.9243
   });
+  const [locationName, setLocationName] = useState('서울 영등포구 여의도동 (여의도역 인근)');
   const [isNavigating, setIsNavigating] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [routeWaypoints, setRouteWaypoints] = useState<Waypoint[]>([]);
@@ -324,30 +394,46 @@ const FlowerMapNavigation: React.FC = () => {
   useEffect(() => {
     ensureLeafletCss();
     getUserLocation();
-    fetchStores();
-
-    return () => {
-      if (animIntervalRef.current) clearInterval(animIntervalRef.current);
-    };
   }, []);
+
+  useEffect(() => {
+    fetchStores();
+  }, [userLocation, searchQuery, selectedRegion]);
 
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         pos => {
-          setUserLocation({
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude
-          });
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          setUserLocation({ lat, lng });
+
+          // 여의도 인근인지 여부 확인 후 이름 표기
+          if (Math.abs(lat - 37.5219) < 0.05 && Math.abs(lng - 126.9243) < 0.05) {
+            setLocationName('서울 영등포구 여의도동 (GPS 감지 성공)');
+          } else {
+            setLocationName(`현재 GPS 위치 (${lat.toFixed(4)}, ${lng.toFixed(4)})`);
+          }
         },
-        err => console.log('Geolocation fallback: 서울 강남역기준')
+        err => {
+          console.log('Geolocation fallback: 기본 여의도역 좌표 적용');
+          setUserLocation({ lat: 37.5219, lng: 126.9243 });
+          setLocationName('서울 영등포구 여의도동 (여의도역 부근)');
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
       );
     }
   };
 
   const fetchStores = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/stores?lat=${userLocation.lat}&lng=${userLocation.lng}`);
+      let query = searchQuery;
+      if (!query && selectedRegion !== '전체') query = selectedRegion;
+
+      let url = `http://localhost:5000/api/stores?lat=${userLocation.lat}&lng=${userLocation.lng}`;
+      if (query) url += `&search=${encodeURIComponent(query)}`;
+
+      const res = await fetch(url);
       const json = await res.json();
       if (json.success) {
         setStores(json.data);
@@ -358,7 +444,7 @@ const FlowerMapNavigation: React.FC = () => {
     }
   };
 
-  // Map engine render (Leaflet for high-fidelity interactive map demo)
+  // Render Leaflet Map
   useEffect(() => {
     if (!mapRef.current) return;
     const L = (window as any).L;
@@ -368,7 +454,7 @@ const FlowerMapNavigation: React.FC = () => {
       const map = L.map(mapRef.current).setView([userLocation.lat, userLocation.lng], 14);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors | BloomSync Map'
+        attribution: '&copy; OpenStreetMap | BloomSync 위치 서비스'
       }).addTo(map);
 
       leafletMapInstance.current = map;
@@ -384,23 +470,23 @@ const FlowerMapNavigation: React.FC = () => {
       }
     });
 
-    // Add User Marker
+    // Add User Marker (Yeouido Pulse Radar Icon)
     const userIcon = L.divIcon({
       className: 'custom-user-marker',
-      html: `<div style="background:#ec4899; width:24px; height:24px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 15px rgba(236,72,153,0.9);"></div>`,
-      iconSize: [24, 24]
+      html: `<div style="background:#ec4899; width:26px; height:26px; border-radius:50%; border:3px solid #fff; box-shadow:0 0 20px rgba(236,72,153,1); animation: pulseGlow 2s infinite;"></div>`,
+      iconSize: [26, 26]
     });
     userMarkerRef.current = L.marker([userLocation.lat, userLocation.lng], { icon: userIcon })
       .addTo(map)
-      .bindPopup('<b>내 위치</b>');
+      .bindPopup(`<b>내 위치</b><br/>${locationName}`);
 
     // Add Store Markers
     stores.forEach(store => {
       const isSelected = selectedStore?.id === store.id;
       const storeIcon = L.divIcon({
         className: 'custom-store-marker',
-        html: `<div style="background:${isSelected ? '#8b5cf6' : '#ec4899'}; color:white; padding:6px 12px; border-radius:999px; font-weight:bold; font-size:12px; white-space:nowrap; border:2px solid #fff; box-shadow:0 4px 12px rgba(0,0,0,0.3);">🌸 ${store.name}</div>`,
-        iconSize: [110, 30]
+        html: `<div style="background:${isSelected ? '#a855f7' : '#ec4899'}; color:white; padding:7px 14px; border-radius:999px; font-weight:800; font-size:12px; white-space:nowrap; border:2px solid #fff; box-shadow:0 6px 16px rgba(0,0,0,0.35);">🌸 ${store.name}</div>`,
+        iconSize: [120, 32]
       });
 
       const marker = L.marker([store.latitude, store.longitude], { icon: storeIcon }).addTo(map);
@@ -410,7 +496,7 @@ const FlowerMapNavigation: React.FC = () => {
     });
   }, [userLocation, stores, selectedStore, selectedProvider]);
 
-  // Start Route Navigation Simulation
+  // Start Navigation
   const startNavigation = async (store: Store) => {
     try {
       const res = await fetch(
@@ -427,20 +513,18 @@ const FlowerMapNavigation: React.FC = () => {
       const L = (window as any).L;
       const map = leafletMapInstance.current;
 
-      // Render Polyline
       if (polylineRef.current) map.removeLayer(polylineRef.current);
 
       const latLngs = waypoints.map(w => [w.lat, w.lng]);
       polylineRef.current = L.polyline(latLngs, {
         color: '#ec4899',
-        weight: 6,
-        dashArray: '8, 12',
+        weight: 7,
+        dashArray: '10, 14',
         lineCap: 'round'
       }).addTo(map);
 
-      map.fitBounds(polylineRef.current.getBounds(), { padding: [50, 50] });
+      map.fitBounds(polylineRef.current.getBounds(), { padding: [60, 60] });
 
-      // Animate Movement
       let step = 0;
       if (animIntervalRef.current) clearInterval(animIntervalRef.current);
 
@@ -459,7 +543,7 @@ const FlowerMapNavigation: React.FC = () => {
         }
       }, 1200);
     } catch (e) {
-      console.error('Failed to start navigation route:', e);
+      console.error('Navigation route error:', e);
     }
   };
 
@@ -473,19 +557,19 @@ const FlowerMapNavigation: React.FC = () => {
 
   const getProviderName = () => {
     switch (selectedProvider) {
-      case 'kakao': return '카카오 지도 (Kakao Maps API)';
-      case 'naver': return '네이버 지도 (Naver Maps API)';
+      case 'kakao': return '카카오 지도 (Kakao Maps Web SDK)';
+      case 'naver': return '네이버 지도 (Naver Maps Web SDK)';
       case 'google': return '구글 지도 (Google Maps API)';
-      case 'leaflet': return '자유 지도 (OpenStreetMap)';
+      case 'leaflet': return '자유 지도 (OpenStreetMap Engine)';
     }
   };
 
   return (
     <Container className="animate-fade-in">
       <HeaderBox>
-        <Title>📍 실시간 근처 꽃집 & 지도 네비게이션</Title>
+        <Title>📍 스마트 지도 & 내 주변 꽃집 검색</Title>
 
-        <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', flexWrap: 'wrap' }}>
+        <ControlBar>
           <ProviderSelectorGroup>
             <ProviderChip $active={selectedProvider === 'kakao'} onClick={() => setSelectedProvider('kakao')}>
               카카오 지도
@@ -499,14 +583,46 @@ const FlowerMapNavigation: React.FC = () => {
           </ProviderSelectorGroup>
 
           <RefreshButton onClick={() => { getUserLocation(); fetchStores(); }}>
-            <span>🔄</span> 위치 갱신
+            <span>🔄</span> 위치 갱신 (여의도)
           </RefreshButton>
-        </div>
+        </ControlBar>
       </HeaderBox>
+
+      <LocationNoticeBanner>
+        <div>
+          <span style={{ color: '#ec4899', marginRight: '0.4rem' }}>📍</span>
+          <span>내 위치: <strong>{locationName}</strong></span>
+        </div>
+        <div style={{ opacity: 0.8, fontSize: '0.85rem' }}>
+          * 주변 꽃집까지의 직선 거리가 정밀 계산됩니다.
+        </div>
+      </LocationNoticeBanner>
 
       <Layout>
         {/* Sidebar */}
         <Sidebar>
+          <SearchInput
+            type="text"
+            placeholder="여의도, 강남, 홍대, 꽃집 이름 검색..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+
+          <RegionFilterGroup>
+            <RegionChip $active={selectedRegion === '여의도'} onClick={() => { setSelectedRegion('여의도'); setSearchQuery(''); }}>
+              📍 여의도
+            </RegionChip>
+            <RegionChip $active={selectedRegion === '강남'} onClick={() => { setSelectedRegion('강남'); setSearchQuery(''); }}>
+              🏙️ 강남/서초
+            </RegionChip>
+            <RegionChip $active={selectedRegion === '홍대'} onClick={() => { setSelectedRegion('홍대'); setSearchQuery(''); }}>
+              🎨 홍대/마포
+            </RegionChip>
+            <RegionChip $active={selectedRegion === '전체'} onClick={() => { setSelectedRegion('전체'); setSearchQuery(''); }}>
+              🌿 전체 지역
+            </RegionChip>
+          </RegionFilterGroup>
+
           {stores.map(store => (
             <StoreCard
               key={store.id}
@@ -521,10 +637,12 @@ const FlowerMapNavigation: React.FC = () => {
 
               <StoreAddress>
                 📍 {store.address}
-                {(store as any).distance && <DistanceBadge>({(store as any).distance} km)</DistanceBadge>}
+                {(store as any).distance !== undefined && (
+                  <DistanceBadge>({(store as any).distance} km)</DistanceBadge>
+                )}
               </StoreAddress>
 
-              <p style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', marginBottom: '0.8rem' }}>
+              <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', marginBottom: '0.9rem', lineHeight: 1.5 }}>
                 {store.description}
               </p>
 
@@ -549,7 +667,7 @@ const FlowerMapNavigation: React.FC = () => {
         {/* Map View */}
         <MapContainerWrapper>
           <MapProviderNotice>
-            <span>🗺️ 현재 활성화 지도:</span>
+            <span>🗺️ 활성화 지도 엔진:</span>
             <strong>{getProviderName()}</strong>
           </MapProviderNotice>
 
@@ -557,7 +675,7 @@ const FlowerMapNavigation: React.FC = () => {
             <NavigationHUD className="animate-fade-in">
               <span style={{ fontSize: '1.8rem' }}>🚙</span>
               <HUDText>
-                <div className="title">실시간 모의 주행 중 ({selectedStore?.name})</div>
+                <div className="title">실시간 주행 안내 중 ({selectedStore?.name})</div>
                 <div className="guide">{routeWaypoints[currentStepIndex]?.stepText}</div>
               </HUDText>
               <StopNavButton onClick={stopNavigation}>안내 종료</StopNavButton>

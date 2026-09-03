@@ -9,15 +9,15 @@ const pulse = keyframes`
 `;
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 2rem auto;
   padding: 0 1.5rem;
 `;
 
 const HeroBox = styled.div`
   text-align: center;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  padding: 3.5rem 2rem;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
   border-radius: 28px;
   border: 1px solid var(--border-color);
   margin-bottom: 2.5rem;
@@ -25,31 +25,32 @@ const HeroBox = styled.div`
 `;
 
 const Badge = styled.span`
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  background: var(--brand-gradient);
   color: #fff;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.1rem;
   border-radius: 999px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
   display: inline-block;
   margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
 `;
 
 const MainTitle = styled.h1`
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 0.8rem;
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  background: var(--brand-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
 const Description = styled.p`
   color: var(--text-secondary);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   max-width: 650px;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
   line-height: 1.6;
 `;
 
@@ -57,8 +58,8 @@ const MatchForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  padding: 2rem;
-  border-radius: 24px;
+  padding: 2.2rem;
+  border-radius: 28px;
   margin-bottom: 2.5rem;
 `;
 
@@ -69,8 +70,8 @@ const FormGroup = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.08rem;
+  font-weight: 800;
   color: var(--text-primary);
   display: flex;
   align-items: center;
@@ -79,20 +80,20 @@ const Label = styled.label`
 
 const OptionGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
   gap: 0.8rem;
 `;
 
 const OptionCard = styled.button<{ $selected: boolean }>`
-  padding: 0.8rem 1rem;
-  border-radius: 16px;
+  padding: 0.9rem 1.1rem;
+  border-radius: 18px;
   border: 2px solid ${props => (props.$selected ? '#ec4899' : 'var(--border-color)')};
-  background: ${props => (props.$selected ? 'rgba(236, 72, 153, 0.12)' : 'var(--card-bg)')};
+  background: ${props => (props.$selected ? 'linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)' : 'var(--card-bg)')};
   color: ${props => (props.$selected ? '#ec4899' : 'var(--text-primary)')};
-  font-weight: ${props => (props.$selected ? '700' : '500')};
-  font-size: 0.95rem;
+  font-weight: ${props => (props.$selected ? '800' : '600')};
+  font-size: 0.98rem;
   cursor: pointer;
-  transition: all 0.25 ease;
+  transition: all 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,6 +102,7 @@ const OptionCard = styled.button<{ $selected: boolean }>`
   &:hover {
     border-color: #ec4899;
     transform: translateY(-2px);
+    background: rgba(236, 72, 153, 0.12);
   }
 `;
 
@@ -108,13 +110,13 @@ const SubmitButton = styled.button`
   width: 100%;
   padding: 1.2rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  background: var(--brand-gradient);
   color: #fff;
   font-size: 1.2rem;
   font-weight: 800;
   border: none;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+  box-shadow: 0 12px 30px rgba(236, 72, 153, 0.4);
   transition: all 0.3s ease;
   animation: ${pulse} 3s infinite;
   display: flex;
@@ -125,7 +127,7 @@ const SubmitButton = styled.button`
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(236, 72, 153, 0.5);
+    box-shadow: 0 16px 36px rgba(236, 72, 153, 0.5);
   }
 
   &:disabled {
@@ -144,18 +146,11 @@ const ResultsGrid = styled.div`
 
 const ResultCard = styled.div`
   display: grid;
-  grid-template-columns: 320px 1fr;
-  border-radius: 24px;
+  grid-template-columns: 340px 1fr;
+  border-radius: 28px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.3s ease;
 
-  &:hover {
-    transform: translateY(-4px);
-  }
-
-  @media (max-width: 850px) {
+  @media (max-width: 880px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -164,7 +159,7 @@ const ResultImageWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 280px;
+  min-height: 300px;
 
   img {
     width: 100%;
@@ -175,33 +170,33 @@ const ResultImageWrapper = styled.div`
 
 const RibbonBadge = styled.div`
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 1.2rem;
+  left: 1.2rem;
   background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%);
   color: #fff;
-  padding: 0.4rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 800;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 `;
 
 const MatchScoreTag = styled.div`
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 1.2rem;
+  right: 1.2rem;
   background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   color: #38bdf8;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
+  padding: 0.55rem 1.1rem;
+  border-radius: 14px;
   border: 1px solid rgba(56, 189, 248, 0.4);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
 `;
 
 const ResultBody = styled.div`
-  padding: 2rem;
+  padding: 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -212,16 +207,16 @@ const FlowerHeader = styled.div`
 `;
 
 const FlowerTitle = styled.h2`
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-weight: 800;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
   color: var(--text-primary);
 `;
 
 const FlowerMeaningHighlight = styled.div`
   color: #ec4899;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -231,55 +226,56 @@ const DetailSection = styled.div`
   margin: 1.2rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.9rem;
 `;
 
 const DetailBox = styled.div`
-  background: rgba(139, 92, 246, 0.08);
-  border-left: 4px solid #8b5cf6;
-  padding: 0.9rem 1.1rem;
-  border-radius: 0 12px 12px 0;
+  background: rgba(168, 85, 247, 0.08);
+  border-left: 4px solid #a855f7;
+  padding: 1rem 1.2rem;
+  border-radius: 0 14px 14px 0;
 
   h4 {
     font-size: 0.85rem;
-    color: #8b5cf6;
-    font-weight: 700;
+    color: #a855f7;
+    font-weight: 800;
     margin-bottom: 0.3rem;
     text-transform: uppercase;
   }
   p {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     color: var(--text-primary);
-    line-height: 1.5;
+    line-height: 1.55;
   }
 `;
 
 const ActionButtonGroup = styled.div`
   display: flex;
   gap: 0.8rem;
-  margin-top: 1.2rem;
+  margin-top: 1.4rem;
   flex-wrap: wrap;
 `;
 
 const LocateStoreButton = styled.button`
   flex: 1;
-  min-width: 180px;
-  padding: 0.8rem 1.2rem;
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  min-width: 200px;
+  padding: 0.9rem 1.4rem;
+  background: var(--brand-gradient);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 0.95rem;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.95;
+    transform: translateY(-2px);
   }
 `;
 
@@ -386,7 +382,7 @@ const AnniversaryMatcher: React.FC<Props> = ({ onSelectStoreTab }) => {
 
       {results && (
         <div style={{ marginTop: '3rem' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1rem', color: 'var(--text-primary)' }}>
+          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1.2rem', color: 'var(--text-primary)' }}>
             🌟 '{selectedOccasion}' 맞춤 매칭 추천 (TOP {results.length})
           </h2>
 

@@ -80,4 +80,21 @@ export interface AnniversaryMatchResult {
   recommendedTag: string;
 }
 
+export interface CrawlResult {
+  lastUpdated: string;
+  totalFlowersCount: number;
+  newFlowersAdded: number;
+  sources: string[];
+  status: 'SUCCESS' | 'CRAWLING' | 'FAILED';
+}
+
+export interface ValidationResult {
+  validatedAt: string;
+  totalChecked: number;
+  imageMatchConfidence: number; // e.g. 99.8%
+  meaningAccuracy: number; // e.g. 100%
+  status: 'VALIDATED_100%';
+}
+
+
 
