@@ -29,6 +29,11 @@ BloomSync 프로젝트 개발 및 빌드 과정에서 발생할 수 있는 이�
 - **해결 방안**:
   - `FlowerMapNavigation.tsx`에 OpenStreetMap(Leaflet) 엔진을 폴백(Fallback)으로 기본 연동하여 API 키 없이도 즉시 고화질 인터랙티브 지도와 마커, 실시간 길찾기 네비게이션이 동작하도록 멀티 프로바이더 구조 설계.
 
+### 5. `react-scripts build` 실행 시 `.tsx` 모듈 인식 불가 (`Can't resolve './App'`)
+- **증상**: 웹 프로덕션 빌드 중 `Module not found: Error: Can't resolve './App' in '.../web/src'` 에러 발생.
+- **원인**: `web/` 디렉터리 내에 `tsconfig.json`이 선언되어 있지 않아 `react-scripts` 빌더가 TypeScript 모듈 확장자(`.tsx`, `.ts`)를 자동으로 해석하지 못함.
+- **해결 방안**: `web/tsconfig.json`을 작성하여 `moduleResolution: node`, `jsx: react-jsx`, `include: ["src", "../common"]`를 명시함으로써 `npm run build` 100% 성공 검증 완료.
+
 ---
 
 ## 📌 [v0.1.0] 초기 설정 이슈 (2026-04-14)
